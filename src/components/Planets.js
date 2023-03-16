@@ -4,7 +4,7 @@ import Planet from "./Planet";
 
 const fetchPlanets = async (page) => {
   const res = await fetch(`http://swapi.dev/api/planets/?page=${page}`);
-  
+
   return res.json();
 };
 
@@ -15,8 +15,7 @@ const Planets = () => {
     queryFn: () => fetchPlanets(page),
     keepPreviousData: true,
   });
-  console.log(data);
-  console.log(isPreviousData)
+  console.log(page);
 
   return (
     <div>
@@ -30,11 +29,11 @@ const Planets = () => {
       <span>Current Page : {page + 1}</span>
       <button
         onClick={() => {
-          if (!isPreviousData && data.hasMore) {
+          if (!isPreviousData && data.next) {
             setPage((old) => old + 1);
           }
         }}
-        disabled={isPreviousData || !data?.hasMore}
+        // disabled={isPreviousData || !data?.hasMore}
       >
         Next Page
       </button>
@@ -43,7 +42,7 @@ const Planets = () => {
       {status === "error" && <div>Error fetching data</div>}
       {status === "success" && (
         <div>
-          {isPreviousData.results.map((planet) => (
+          {data.results.map((planet) => (
             <Planet key={planet.name} planet={planet} />
           ))}
         </div>
