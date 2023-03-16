@@ -13,7 +13,7 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <div className="mx-auto container ">
-          <h1 className=" text-yellow-400 text-4xl font-bold mt-12">
+          <h1 className=" text-yellow-400 text-4xl font-bold mt-12 text-center">
             Star Wars Info
           </h1>
           <Navbar setPage={setPage} />
